@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +14,28 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique()->index();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('country_code');
+            $table->string('phone')->unique()->index();
+            $table->date('date_of_birth');
+            $table->enum('gender', ['male', 'female']);
+            $table->string('nationality');
+            $table->string('country_of_residence');
+            $table->string('telegram_id')->index();
+            $table->enum('education_level', ['beginner', 'intermediate', 'advanced']);
+            $table->boolean('previous_sharia_programs')->default(false);
+            $table->string('previous_sharia_programs_detail')->nullable();
+            $table->string('how_heard_about')->nullable();
             $table->string('password');
+            $table->timestamp('last_login_at')->nullable();
+
+            $table->foreignId('role_id')->default(1)->constrained('roles')->onDelete('restrict');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
