@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('country_of_residence');
             $table->string('telegram_id')->index();
-            $table->enum('education_level', ['beginner', 'intermediate', 'advanced']);
+            $table->string('education_level');
             $table->boolean('previous_sharia_programs')->default(false);
             $table->string('previous_sharia_programs_detail')->nullable();
             $table->string('how_heard_about')->nullable();
