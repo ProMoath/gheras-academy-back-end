@@ -10,9 +10,9 @@ class Role extends Model
 {
     #[Fillable(['name'])]
 
-    public const int admin = 1;
+    public const int student = 1;
     public const int supervisor = 2;
-    public const int student = 3;
+    public const int admin = 3;
 
     public function user():HasMany
     {
